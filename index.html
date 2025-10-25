@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edutrivia - Educational Trivia Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Login Screen -->
+        <div id="login-screen" class="screen active">
+            <div class="login-container">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h1>Edutrivia</h1>
+                </div>
+                <div class="login-form">
+                    <h2>Welcome Back!</h2>
+                    <div class="form-group">
+                        <input type="text" id="username" placeholder="Username" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" placeholder="Password" required>
+                    </div>
+                    <button id="login-btn" class="btn btn-primary">Login</button>
+                    <button id="register-btn" class="btn btn-secondary">Register New Account</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard -->
+        <div id="dashboard-screen" class="screen">
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Edutrivia</span>
+                </div>
+                <div class="nav-user">
+                    <span id="user-display"></span>
+                    <div class="user-stats">
+                        <span class="elo">ELO: <span id="user-elo">1200</span></span>
+                        <span class="points">Points: <span id="user-points">1000</span></span>
+                    </div>
+                    <button id="logout-btn" class="btn btn-outline">Logout</button>
+                </div>
+            </nav>
+
+            <div class="dashboard-content">
+                <div class="welcome-section">
+                    <h2>Welcome back, <span id="welcome-user"></span>!</h2>
+                    <p>Ready to test your knowledge and compete with players around the world?</p>
+                </div>
+
+                <div class="action-cards">
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <h3>Quick Match</h3>
+                        <p>Find a match with players of similar skill level</p>
+                        <button id="quick-match-btn" class="btn btn-primary">Find Match</button>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>Leaderboard</h3>
+                        <p>See how you rank against other players</p>
+                        <button id="leaderboard-btn" class="btn btn-secondary">View Rankings</button>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <h3>Settings</h3>
+                        <p>Customize your gaming experience</p>
+                        <button id="settings-btn" class="btn btn-secondary">Settings</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Matchmaking Screen -->
+        <div id="matchmaking-screen" class="screen">
+            <div class="matchmaking-container">
+                <div class="matchmaking-header">
+                    <h2>Finding Your Match...</h2>
+                    <p>Searching for players with similar skill level</p>
+                </div>
+                
+                <div class="matchmaking-animation">
+                    <div class="spinner"></div>
+                    <div class="searching-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+
+                <div class="matchmaking-info">
+                    <div class="info-item">
+                        <i class="fas fa-users"></i>
+                        <span>Players Online: <span id="players-online">1,247</span></span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Your ELO: <span id="current-elo">1200</span></span>
+                    </div>
+                </div>
+
+                <button id="cancel-matchmaking" class="btn btn-outline">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="game-header">
+                <div class="game-info">
+                    <div class="player-info">
+                        <span class="player-name" id="player1-name">You</span>
+                        <span class="player-elo" id="player1-elo">1200</span>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="player-info">
+                        <span class="player-name" id="player2-name">Opponent</span>
+                        <span class="player-elo" id="player2-elo">1200</span>
+                    </div>
+                </div>
+                <div class="game-timer">
+                    <i class="fas fa-clock"></i>
+                    <span id="game-timer">30</span>s
+                </div>
+            </div>
+
+            <div class="game-content">
+                <div class="question-section">
+                    <h3 id="question-category">Science</h3>
+                    <div class="clues-container">
+                        <div class="clue" id="clue-1">
+                            <div class="clue-number">1</div>
+                            <div class="clue-text">This is the first clue...</div>
+                        </div>
+                        <div class="clue" id="clue-2">
+                            <div class="clue-number">2</div>
+                            <div class="clue-text">This is the second clue...</div>
+                        </div>
+                        <div class="clue" id="clue-3">
+                            <div class="clue-number">3</div>
+                            <div class="clue-text">This is the third clue...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="answers-section">
+                    <div class="answer-grid">
+                        <button class="answer-btn" data-answer="A">A) First Answer</button>
+                        <button class="answer-btn" data-answer="B">B) Second Answer</button>
+                        <button class="answer-btn" data-answer="C">C) Third Answer</button>
+                        <button class="answer-btn" data-answer="D">D) Fourth Answer</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-footer">
+                <div class="points-info">
+                    <span>Points at stake: <strong id="points-at-stake">50</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <div class="results-container">
+                <div class="results-header">
+                    <h2>Round Complete!</h2>
+                </div>
+                
+                <div class="results-content">
+                    <div class="result-item">
+                        <div class="result-label">Winner</div>
+                        <div class="result-value" id="winner-name">Player Name</div>
+                    </div>
+                    
+                    <div class="result-item">
+                        <div class="result-label">Points Won</div>
+                        <div class="result-value" id="points-won">50</div>
+                    </div>
+                    
+                    <div class="result-item">
+                        <div class="result-label">New ELO</div>
+                        <div class="result-value" id="new-elo">1225</div>
+                    </div>
+                </div>
+
+                <div class="results-actions">
+                    <button id="play-again-btn" class="btn btn-primary">Play Again</button>
+                    <button id="back-to-dashboard-btn" class="btn btn-secondary">Back to Dashboard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

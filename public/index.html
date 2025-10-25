@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edutrivia - Educational Trivia Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar" id="navbar" style="display: none;">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Edutrivia</span>
+                </div>
+                <div class="nav-menu">
+                    <a href="#" class="nav-link" id="nav-dashboard">
+                        <i class="fas fa-home"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#" class="nav-link" id="nav-leaderboard">
+                        <i class="fas fa-trophy"></i>
+                        <span>Leaderboard</span>
+                    </a>
+                    <a href="#" class="nav-link" id="nav-profile">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                </div>
+                <div class="nav-user">
+                    <div class="user-info">
+                        <span class="username" id="nav-username">Username</span>
+                        <div class="user-stats">
+                            <span class="elo">ELO: <span id="nav-elo">1200</span></span>
+                            <span class="points">Points: <span id="nav-points">1000</span></span>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline btn-sm" id="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Login Page -->
+        <div id="login-page" class="page active">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <div class="logo">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h1>Edutrivia</h1>
+                        </div>
+                        <p class="auth-subtitle">Test your knowledge and compete with players worldwide</p>
+                    </div>
+                    
+                    <div class="auth-tabs">
+                        <button class="tab-btn active" id="login-tab">Login</button>
+                        <button class="tab-btn" id="register-tab">Sign Up</button>
+                    </div>
+
+                    <form class="auth-form" id="login-form">
+                        <div class="form-group">
+                            <label for="login-username">Username</label>
+                            <input type="text" id="login-username" placeholder="Enter your username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" placeholder="Enter your password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Login
+                        </button>
+                    </form>
+
+                    <form class="auth-form" id="register-form" style="display: none;">
+                        <div class="form-group">
+                            <label for="register-username">Username</label>
+                            <input type="text" id="register-username" placeholder="Choose a username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Password</label>
+                            <input type="password" id="register-password" placeholder="Create a password (6+ characters)" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-confirm">Confirm Password</label>
+                            <input type="password" id="register-confirm" placeholder="Confirm your password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <i class="fas fa-user-plus"></i>
+                            Create Account
+                        </button>
+                    </form>
+
+                    <div class="auth-footer">
+                        <p>Demo Account: <strong>demo</strong> / <strong>demo123</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div id="dashboard-page" class="page">
+            <div class="dashboard-container">
+                <div class="welcome-section">
+                    <h2>Welcome back, <span id="welcome-username">Player</span>!</h2>
+                    <p>Ready to test your knowledge and climb the leaderboard?</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="user-elo">1200</h3>
+                            <p>ELO Rating</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="user-points">1000</h3>
+                            <p>Edutrivia Points</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="user-games">0</h3>
+                            <p>Games Played</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="user-wins">0</h3>
+                            <p>Games Won</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-section">
+                    <div class="action-card primary">
+                        <div class="action-icon">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="action-content">
+                            <h3>Quick Match</h3>
+                            <p>Find an opponent with similar skill level and compete in real-time trivia</p>
+                            <button class="btn btn-primary btn-lg" id="quick-match-btn">
+                                <i class="fas fa-search"></i>
+                                Find Match
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="action-grid">
+                        <div class="action-card">
+                            <div class="action-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="action-content">
+                                <h3>Leaderboard</h3>
+                                <p>See how you rank against other players</p>
+                                <button class="btn btn-secondary" id="leaderboard-btn">
+                                    <i class="fas fa-list"></i>
+                                    View Rankings
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="action-icon">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                            <div class="action-content">
+                                <h3>Settings</h3>
+                                <p>Customize your gaming experience</p>
+                                <button class="btn btn-secondary" id="settings-btn">
+                                    <i class="fas fa-sliders-h"></i>
+                                    Settings
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Matchmaking Page -->
+        <div id="matchmaking-page" class="page">
+            <div class="matchmaking-container">
+                <div class="matchmaking-header">
+                    <h2>Finding Your Match...</h2>
+                    <p>Searching for players with similar skill level</p>
+                </div>
+                
+                <div class="matchmaking-animation">
+                    <div class="spinner"></div>
+                    <div class="searching-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+
+                <div class="matchmaking-info">
+                    <div class="info-card">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <h4>Players Online</h4>
+                            <p id="players-online">1,247</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-chart-line"></i>
+                        <div>
+                            <h4>Your ELO</h4>
+                            <p id="current-elo">1200</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Search Time</h4>
+                            <p id="search-time">0s</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-outline" id="cancel-matchmaking">
+                    <i class="fas fa-times"></i>
+                    Cancel Search
+                </button>
+            </div>
+        </div>
+
+        <!-- Game Page -->
+        <div id="game-page" class="page">
+            <div class="game-container">
+                <div class="game-header">
+                    <div class="match-info">
+                        <div class="round-display">
+                            <span id="current-round">Round 1 of 5</span>
+                        </div>
+                        <div class="score-display">
+                            <div class="score-item">
+                                <span class="player-name" id="player1-name">You</span>
+                                <span class="score" id="player1-score">0</span>
+                            </div>
+                            <div class="vs">VS</div>
+                            <div class="score-item">
+                                <span class="player-name" id="player2-name">Opponent</span>
+                                <span class="score" id="player2-score">0</span>
+                            </div>
+                        </div>
+                        <div class="timer-display">
+                            <i class="fas fa-clock"></i>
+                            <span id="game-timer">30</span>s
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-content">
+                    <div class="question-section">
+                        <div class="question-category">
+                            <i class="fas fa-tag"></i>
+                            <span id="question-category">Science</span>
+                        </div>
+                        
+                        <div class="clues-container">
+                            <div class="clue" id="clue-1">
+                                <div class="clue-number">1</div>
+                                <div class="clue-text">This is the first clue...</div>
+                            </div>
+                            <div class="clue" id="clue-2">
+                                <div class="clue-number">2</div>
+                                <div class="clue-text">This is the second clue...</div>
+                            </div>
+                            <div class="clue" id="clue-3">
+                                <div class="clue-number">3</div>
+                                <div class="clue-text">This is the third clue...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="answers-section">
+                        <div class="answer-grid">
+                            <button class="answer-btn" data-answer="A">
+                                <span class="answer-letter">A</span>
+                                <span class="answer-text">First Answer</span>
+                            </button>
+                            <button class="answer-btn" data-answer="B">
+                                <span class="answer-letter">B</span>
+                                <span class="answer-text">Second Answer</span>
+                            </button>
+                            <button class="answer-btn" data-answer="C">
+                                <span class="answer-letter">C</span>
+                                <span class="answer-text">Third Answer</span>
+                            </button>
+                            <button class="answer-btn" data-answer="D">
+                                <span class="answer-letter">D</span>
+                                <span class="answer-text">Fourth Answer</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-footer">
+                    <div class="points-info">
+                        <i class="fas fa-coins"></i>
+                        <span>Points at stake: <strong id="points-at-stake">50</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div id="results-page" class="page">
+            <div class="results-container">
+                <div class="results-header">
+                    <div class="result-icon">
+                        <i class="fas fa-trophy" id="result-trophy"></i>
+                    </div>
+                    <h2 id="result-title">Round Complete!</h2>
+                    <p id="result-subtitle">Great job on that question!</p>
+                </div>
+                
+                <div class="results-content">
+                    <div class="result-stats">
+                        <div class="result-stat">
+                            <div class="stat-label">Winner</div>
+                            <div class="stat-value" id="winner-name">Player Name</div>
+                        </div>
+                        
+                        <div class="result-stat">
+                            <div class="stat-label">Points Won</div>
+                            <div class="stat-value" id="points-won">50</div>
+                        </div>
+                        
+                        <div class="result-stat">
+                            <div class="stat-label">New ELO</div>
+                            <div class="stat-value" id="new-elo">1225</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="results-actions">
+                    <button class="btn btn-primary" id="play-again-btn">
+                        <i class="fas fa-redo"></i>
+                        Play Again
+                    </button>
+                    <button class="btn btn-secondary" id="back-to-dashboard-btn">
+                        <i class="fas fa-home"></i>
+                        Back to Dashboard
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leaderboard Modal -->
+        <div id="leaderboard-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Leaderboard</h2>
+                    <button class="modal-close" id="close-leaderboard">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="leaderboard-list" id="leaderboard-list">
+                        <!-- Leaderboard items will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notification-container"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
